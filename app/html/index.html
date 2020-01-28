@@ -8,35 +8,72 @@
   <title>Graphic preview</title>
 
   <!--build:css css/styles.min.css-->
-  <link rel="stylesheet" href="css/highcharts-setup_styles.css">
+  <link rel="stylesheet" href="css/compound-interest-calculator_styles.css">
   <!--endbuild-->
 
 </head>
 
 <body>
 
-  <div class="chart-area">
-      <div class="chart-head" id="chart-head">This is a headline</div>
-      <div class="chart-subhead">This is a subdeck or chart title. In some cases, there might be a need for a chart title also.</div>
-      <div class="chart-title">This is a chart title</div>
-      <div class="chart-title-social">Social chart title</div>
-      <div class="chart-container" id="chart-container"></div>
-      <div class="chart-note">Note: Anything that needs an additional note or methodology explanation should go here.</div>
-      <div>
-        <span class="chart-credit">kiersten schmidt/grow</span>
-        <span class="chart-source">this is the source</span>
+  <div id="calculator">
+
+    <p class="calculator-label">Compound interest calculator</p>
+
+    <div class="input-area">
+
+      <div class="calc-input money-input">
+        <label for="principal">Initial deposit</label>
+        <input type="number" name="principal" v-model.number="principal"></input>
       </div>
-      <img src="https://fm-static.cnbc.com/awsmedia/chart/2019/6/10/grow_logo.1562793450037.png" class="grow-logo">
-      <img src="https://fm-static.cnbc.com/awsmedia/chart/2019/6/25/grow_logo_transparent-08.1564071637122.png" class="grow-logo-social">
-  </div>
-  <div id="chart-fallback"></div>
+  
+      <div class="calc-input money-input">
+        <label for="contribution">Contributions</label>
+        <input type="number" name="contribution" v-model.number="contribution"></input>
+      </div>
+  
+      <div class="calc-input-radio">
+        <input type="radio" id="annually" name="frequency" v-model="frequency" value="1"></input>
+        <label for="annually">Annually</label>
+  
+        <input type="radio" id="monthly" name="frequency" v-model="frequency" value="12"></input>
+        <label for="monthly">Monthly</label>
+      </div>
+  
+      <div class="calc-input">
+        <label for="years-to-grow">Years to grow</label>
+        <input type="number" name="years-to-grow" v-model.number="yearsToGrow"></input>
+      </div>
+  
+      <div class="calc-input percent-input">
+        <label for="interest-rate">Estimated return rate</label>
+        <input type="number" name="interest-rate" v-model.number="interestRate"></input>
+      </div>
+
+    </div>
+
+    <transition name="fade" mode="out-in">
+       
+        <div class="results">
+          <p class="body-text">Future balance</p>
+          <p class="value-text">${{getResults}}</p>
+
+          <div id="chart-area">
+            <div class="chart-container" id="chart-container"></div>
+          </div>
+
+         </div>
+  
+    </transition>
     
-  <script src="https://code.highcharts.com/highcharts.js"></script>
-  <script src="https://code.highcharts.com/modules/data.js"></script>
+  </div>
+    
+  <!-- <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/modules/data.js"></script> -->
   <!-- <script src="http://code.highcharts.com/modules/exporting.js"></script> -->
   <!-- <script src="https://code.highcharts.com/highcharts-more.js"></script> -->
   <!--build:js js/main.min.js -->
-  <script src="js/highcharts-setup_main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+  <script src="js/compound-interest-calculator_main.js"></script>
   <!-- endbuild -->
 </body>
 </html>

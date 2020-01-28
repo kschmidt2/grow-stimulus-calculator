@@ -23,43 +23,263 @@ $breakpoint-lg: 717px;
 @import "css-reset";
 @import "colors";
 
-.chart-area {
+#calculator {
   @import "type";
-  @import "highcharts";
+  // @import "highcharts";
 
-  background-size: 100px;
-  background-repeat: no-repeat;
-  background-image:
-    url(https://fm-static.cnbc.com/awsmedia/chart/2019/6/10/grow_leaves.1562793463706.png);
-  background-position: bottom right;
   max-width: 660px;
   margin-bottom: 25px;
   font-family: $font-stack;
+  font-size: 18px;
+  padding-top: 5px;
+  border-top: 3px solid $green-primary;
+  display: flex;
+  flex-wrap: wrap;
+
+  b {
+    font-weight: 700;
+  }
+
+  .calculator-label {
+    min-width: auto;
+    font-size: 20px;
+    text-transform: uppercase;
+    margin: 8px 0 24px;
+    font-weight: 700;
+    color: #363f41;
+    @include sm-md-xl {
+      font-size: 24px;
+    }
+  }
+
+  .value-text  {
+    font-size: 36px;
+    line-height: 34px;
+    font-weight: 700;
+    color: $green-primary;
+    margin-top: -10px;
+  }
+
+  .input-area {
+    width: 95%;
+    max-width: 275px;
+    flex-shrink: 0;
+  }
+
+  .calc-subhead {
+    color: $slate-secondary-6;
+    font-size: 30px;
+    font-weight: 600;
+    margin-bottom: 24px;
+    border-top: 5px solid $green-primary;
+    padding-top: 15px;
+    margin-top: 50px;
+  }
+
+  .calc-input {
+    margin-bottom: 20px;
+    & label {
+      display: block;
+      font-weight: 600;
+      font-size: 16px;
+      margin-bottom: 5px;
+      color: $slate-primary;
+    }
+    & input {
+      border: 1px solid $slate-secondary-3;
+      font-size: 24px;
+      color: $green-primary;
+      font-weight: 600;
+      padding: 5px 5px 5px 10px;
+      width: 180px;
+      @include x-small {
+        width: 260px;
+      }
+    }
+    &.money-input {
+      &:after {
+        content: '$';
+        position: relative;
+        top: -2px;
+        left: -180px;
+        height: 20px;
+        width: 10px;
+        z-index: 999;
+        color: $slate-secondary-3;
+        @include x-small {
+          left: -260px;
+        }
+      }
+      & input {
+        padding-left: 25px;
+        width: 160px;
+        @include x-small {
+          width: 240px;
+        }
+      }
+    }
+    &.percent-input {
+      &:after {
+        content: '%';
+        position: relative;
+        top: -2px;
+        left: -25px;
+        height: 20px;
+        width: 10px;
+        z-index: 999;
+        color: $slate-secondary-3;
+        @include x-small {
+          left: -260px;
+        }
+      }
+    }
+  }
+
+  .calc-input-radio {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    margin-top: -15px;
+    @include x-small {
+      margin-top: -15px;
+    }
+    & input {
+      position: absolute !important;
+      clip: rect(0, 0, 0, 0);
+      height: 1px;
+      width: 1px;
+      border: 0;
+      overflow: hidden;
+      &:checked + label {
+        box-shadow: none;
+        background-image: url(https://fm.cnbc.com/applications/cnbc.com/resources/files/2020/01/28/radio-button.png);
+      }
+    }
+    & label {
+      background-color: white;
+      background-image: url(https://fm.cnbc.com/applications/cnbc.com/resources/files/2019/12/03/blank-check.png);
+      background-repeat: no-repeat;
+      background-size: 18px;
+      background-position: 0px center;
+      color: $slate-secondary-5;
+      font-size: 16px;
+      line-height: 1;
+      font-weight: 500;
+      letter-spacing: .7px;
+      padding: 8px 8px 6px 21px;
+      margin-right: 10px;
+      border: 0;
+      transition: all 0.2s ease-in-out;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  & button {
+    margin-bottom: 15px;
+    color: $slate-secondary-5;
+    font-size: 16px;
+    line-height: 1;
+    font-weight: 500;
+    letter-spacing: .7px;
+    text-transform: uppercase;
+    padding: 8px 16px 8px 16px;
+    border: 2px solid $green-primary;
+    transition: all 0.2s ease-in-out;
+    background-color: #fff;
+    &:hover {
+      cursor: pointer;
+      color: #fff;
+      background-color: $green-primary;
+    }
+    @include x-small {
+      padding: 12px 16px 12px 16px;
+    }
+  }
 
   & a {
-    border-bottom: 1px solid $green-primary;
     color: $green-primary;
     text-decoration: none;
   }
 
-  & .chart-title-social, & .grow-logo-social {
-    display: none;
-  }
-
   & .chart-container {
     width: 100%;
-    height: 300px;
+    height: 250px;
     margin-top: -10px;
     @include sm-md-xl {
-      height: 400px;
+      height: 250px;
     }
   }
 
-  & .grow-logo {
-    width: 214px;
+  & .notes {
+    font-size: 14px;
+    color: $slate-secondary-5;
+    line-height: 1.3;
+    border-top: 1px solid black;
+    padding-top: 10px;
     margin-top: 20px;
+  }
+
+  & .error-message {
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .3s ease;
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+  }
+
+  .chart-container {
+    background-color: $slate-secondary-2;
+  }
+
+  .results {
+    flex-grow: 1;
   }
   
 }
 
-@import "social";
+// .chart-area {
+//   @import "type";
+//   // @import "highcharts";
+
+//   background-size: 100px;
+//   background-repeat: no-repeat;
+//   background-image:
+//     url(https://fm-static.cnbc.com/awsmedia/chart/2019/6/10/grow_leaves.1562793463706.png);
+//   background-position: bottom right;
+//   max-width: 660px;
+//   margin-bottom: 25px;
+//   font-family: $font-stack;
+
+//   & a {
+//     border-bottom: 1px solid $green-primary;
+//     color: $green-primary;
+//     text-decoration: none;
+//   }
+
+//   & .chart-title-social, & .grow-logo-social {
+//     display: none;
+//   }
+
+//   & .chart-container {
+//     width: 100%;
+//     height: 300px;
+//     margin-top: -10px;
+//     @include sm-md-xl {
+//       height: 400px;
+//     }
+//   }
+
+//   & .grow-logo {
+//     width: 214px;
+//     margin-top: 20px;
+//   }
+  
+// }
+
+
