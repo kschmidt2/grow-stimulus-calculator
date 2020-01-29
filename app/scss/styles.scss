@@ -2,6 +2,18 @@ $breakpoint-sm: 540px;
 $breakpoint-md: 660px;
 $breakpoint-lg: 717px;
 
+@mixin x-x-small {
+  @media (max-width: 367px) {
+    @content;
+  }
+}
+
+@mixin x-small-only {
+  @media (min-width: 368px) and (max-width: 539px) {
+    @content;
+  }
+}
+
 @mixin x-small {
   @media (max-width: #{$breakpoint-sm - 1px}) {
     @content;
@@ -23,30 +35,58 @@ $breakpoint-lg: 717px;
 @import "css-reset";
 @import "colors";
 
+.top-strip {
+  background-image: url(https://fm.cnbc.com/applications/cnbc.com/resources/files/2020/01/29/top-strip.png);
+  background-position: 0px 0px;
+  background-repeat: no-repeat;
+  background-size: 620px;
+  height: 25px; 
+  max-width: 620px;
+  margin-bottom: -20px;
+}
+
 #calculator {
   @import "type";
   // @import "highcharts";
 
-  max-width: 660px;
+  max-width: 580px;
   margin-bottom: 25px;
   font-family: $font-stack;
   font-size: 18px;
-  padding-top: 5px;
-  border-top: 3px solid $green-primary;
   display: flex;
   flex-wrap: wrap;
+  // background-color: #7bc249;
+  padding: 20px;
+  background-color: $green-secondary-5;
+  background-image: url(https://fm.cnbc.com/applications/cnbc.com/resources/files/2020/01/29/background-5.png);
+  background-position: left 75px;
+  background-repeat: no-repeat;
+  background-size: 620px;
+  @include x-small-only {
+    background-position: left 110px;
+  }
+  @include x-x-small {
+    background-position: left 145px;
+  }
 
   b {
     font-weight: 700;
   }
 
+  p.label-text {
+    margin-block-start: 0;
+    margin-block-end: 0;
+    font-weight: 600;
+    font-size: 16px;
+  }
+
   .calculator-label {
-    min-width: auto;
-    font-size: 20px;
+    font-size: 28px;
+    line-height: 32px;
     text-transform: uppercase;
-    margin: 8px 0 24px;
+    margin: 5px 0 40px;
     font-weight: 700;
-    color: #363f41;
+    color: white;
     @include sm-md-xl {
       font-size: 24px;
     }
@@ -56,14 +96,18 @@ $breakpoint-lg: 717px;
     font-size: 36px;
     line-height: 34px;
     font-weight: 700;
-    color: $green-primary;
-    margin-top: -10px;
+    color: white;
+    margin-bottom: 30px;
+    margin-top: 5px;
   }
 
   .input-area {
-    width: 95%;
-    max-width: 275px;
+    width: 100%;
+    max-width: 240px;
     flex-shrink: 0;
+    @include x-small {
+      max-width: 350px;
+    }
   }
 
   .calc-subhead {
@@ -83,7 +127,6 @@ $breakpoint-lg: 717px;
       font-weight: 600;
       font-size: 16px;
       margin-bottom: 5px;
-      color: $slate-primary;
     }
     & input {
       border: 1px solid $slate-secondary-3;
@@ -93,7 +136,7 @@ $breakpoint-lg: 717px;
       padding: 5px 5px 5px 10px;
       width: 180px;
       @include x-small {
-        width: 260px;
+        width: 215px;
       }
     }
     &.money-input {
@@ -107,14 +150,14 @@ $breakpoint-lg: 717px;
         z-index: 999;
         color: $slate-secondary-3;
         @include x-small {
-          left: -260px;
+          left: -225px;
         }
       }
       & input {
         padding-left: 25px;
         width: 160px;
         @include x-small {
-          width: 240px;
+          width: 200px;
         }
       }
     }
@@ -123,14 +166,11 @@ $breakpoint-lg: 717px;
         content: '%';
         position: relative;
         top: -2px;
-        left: -25px;
+        left: -35px;
         height: 20px;
         width: 10px;
         z-index: 999;
         color: $slate-secondary-3;
-        @include x-small {
-          left: -260px;
-        }
       }
     }
   }
@@ -152,21 +192,19 @@ $breakpoint-lg: 717px;
       overflow: hidden;
       &:checked + label {
         box-shadow: none;
-        background-image: url(https://fm.cnbc.com/applications/cnbc.com/resources/files/2020/01/28/radio-button.png);
+        background-image: url(https://fm.cnbc.com/applications/cnbc.com/resources/files/2020/01/29/white-radio-filled.png);
       }
     }
     & label {
-      background-color: white;
-      background-image: url(https://fm.cnbc.com/applications/cnbc.com/resources/files/2019/12/03/blank-check.png);
+      background-image: url(https://fm.cnbc.com/applications/cnbc.com/resources/files/2020/01/29/white-radio-empty.png);
       background-repeat: no-repeat;
       background-size: 18px;
       background-position: 0px center;
-      color: $slate-secondary-5;
       font-size: 16px;
       line-height: 1;
       font-weight: 500;
       letter-spacing: .7px;
-      padding: 8px 8px 6px 21px;
+      padding: 8px 2px 6px 24px;
       margin-right: 10px;
       border: 0;
       transition: all 0.2s ease-in-out;
@@ -206,9 +244,9 @@ $breakpoint-lg: 717px;
   & .chart-container {
     width: 100%;
     height: 250px;
-    margin-top: -10px;
+    background-color: rgba(255, 255, 255, 0.5);
     @include sm-md-xl {
-      height: 250px;
+      height: 270px;
     }
   }
 
@@ -233,12 +271,13 @@ $breakpoint-lg: 717px;
     opacity: 0;
   }
 
-  .chart-container {
-    background-color: $slate-secondary-2;
-  }
-
   .results {
     flex-grow: 1;
+  }
+
+  & .grow-logo {
+    width: 214px;
+    margin-top: 10px;
   }
   
 }

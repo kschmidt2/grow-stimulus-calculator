@@ -1,7 +1,7 @@
   var calculator = new Vue({
     el: '#calculator',
     data: {
-      principal: 0,
+      principal: 5000,
       frequency:1,
       contribution: 100,
       yearsToGrow: 10,
