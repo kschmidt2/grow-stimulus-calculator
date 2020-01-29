@@ -17,18 +17,40 @@
                 n = this.frequency,
                 t = this.yearsToGrow,
                 PMT = this.contribution,
+                totalContributions,
                 fvOfPrincipal,
-                fvOfContributions;
+                fvOfContributions,
+                totalReturn,
+                totalInvestment,
+                combined,
+                iData = [];
+                rData = [];
+
+            totalContributions = P + (PMT*t);
     
-            fvOfPrincipal = P * Math.pow(1+(r/n),n*t);
+            // fvOfPrincipal = P * Math.pow(1+(r/n),n*t);
 
-            console.log(fvOfPrincipal)
+            fvOfPrincipal = P;
+            fvOfContributions = 0;
 
-            fvOfContributions = PMT * (Math.pow(1+(r/n),n*t) - 1)/(r/n);
+            for (i=0; i<n*t; i++) {
+                fvOfPrincipal = fvOfPrincipal*(1+r/n);
+                fvOfContributions = fvOfContributions*(1+r/n)+PMT;
+                totalInvestment = PMT*(i+1) + P;
+                combined = fvOfPrincipal + fvOfContributions;
+                totalReturn = combined - totalInvestment;
+                iData.push(totalInvestment);
+                rData.push(totalReturn);
+            }
 
-            console.log(fvOfContributions);
+            console.log(iData);
+            console.log(rData);
+
+            // fvOfContributions = PMT * (Math.pow(1+(r/n),n*t) - 1)/(r/n);
 
             futureBalance = fvOfPrincipal + fvOfContributions;
+
+            totalReturn = futureBalance - totalContributions;
 
             futureBalance = futureBalance.toLocaleString(undefined,
                 {'minimumFractionDigits':0,'maximumFractionDigits':0});
