@@ -35,7 +35,8 @@
     "lodash.template": "^4.5.0",
     "open": "^6.4.0",
     "popper.js": "^1.15.0",
-    "requirejs": "^2.3.6"
+    "requirejs": "^2.3.6",
+    "vue-debounce": "^2.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",

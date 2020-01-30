@@ -32,6 +32,9 @@ $breakpoint-lg: 717px;
   }
 }
 
+$font-stack: 'Avenir Next', 'Arial', sans-serif;
+
+
 @import "css-reset";
 @import "colors";
 
@@ -46,8 +49,7 @@ $breakpoint-lg: 717px;
 }
 
 #calculator {
-  @import "type";
-  // @import "highcharts";
+  @import "highcharts";
 
   max-width: 580px;
   margin-bottom: 25px;
@@ -78,14 +80,20 @@ $breakpoint-lg: 717px;
     margin-block-end: 0;
     font-weight: 600;
     font-size: 16px;
+    margin-left: 10px;
+    @include sm-md-xl {
+      text-align: center;
+      margin-left: 0px;
+    }
   }
 
   .calculator-label {
-    font-size: 28px;
-    line-height: 32px;
+    font-size: 26px;
+    line-height: 30px;
     text-transform: uppercase;
     margin: 5px 0 40px;
-    font-weight: 700;
+    font-weight: 600;
+    letter-spacing: 1px;
     color: white;
     @include sm-md-xl {
       font-size: 24px;
@@ -96,15 +104,19 @@ $breakpoint-lg: 717px;
     font-size: 36px;
     line-height: 34px;
     font-weight: 700;
-    color: white;
-    margin-bottom: 30px;
+    color: $green-primary;
     margin-top: 5px;
+    margin-left: 10px;
+    @include sm-md-xl {
+      text-align: center;
+      margin-left: 0px;
+    }
   }
 
   .input-area {
     width: 100%;
     max-width: 240px;
-    flex-shrink: 0;
+    // flex-shrink: 0;
     @include x-small {
       max-width: 350px;
     }
@@ -243,12 +255,13 @@ $breakpoint-lg: 717px;
 
   & .chart-container {
     width: 100%;
-    height: 250px;
-    margin-bottom: 10px;
-    background-color: rgba(255, 255, 255, 0.5);
-    @include sm-md-xl {
-      height: 270px;
+    height: 275px;
+    margin-top: -35px;
+    @include x-small {
+      margin-top: -20px;
+      margin-bottom: 20px;
     }
+    // background-color: rgba(255, 255, 255, 0.5);
   }
 
   & .notes {
@@ -274,6 +287,16 @@ $breakpoint-lg: 717px;
 
   .results {
     flex-grow: 1;
+    background-color: white;
+    padding: 10px 0;
+    margin-top: 5px;
+    height: 80%;
+    @include x-x-small {
+      max-width: 250px;
+    }
+    @include x-small-only {
+      max-width: 320px;
+    }
   }
 
   & .grow-logo {
@@ -281,46 +304,32 @@ $breakpoint-lg: 717px;
     margin-top: 10px;
     margin-right: 20px;
   }
+
+& .highcharts-legend {
+  @include sm-md-xl {
+    transform: translate(135px,20px) !important;
+  }
+  @include x-small {
+    transform: translate(3px,0) !important;
+  }
   
 }
 
-// .chart-area {
-//   @import "type";
-//   // @import "highcharts";
+.chart-credit {
+  font-size: 9.5px;
+  line-height: 12px;
+  text-transform: uppercase;
+  color: $slate-secondary-5;
+  letter-spacing: 1px;
+  width: 100%;
+  color: white;
+  margin-top: 20px;
+  @include sm-md-xl {
+      font-size: 10px;
+      text-align: right;
+      margin-bottom: -40px;
 
-//   background-size: 100px;
-//   background-repeat: no-repeat;
-//   background-image:
-//     url(https://fm-static.cnbc.com/awsmedia/chart/2019/6/10/grow_leaves.1562793463706.png);
-//   background-position: bottom right;
-//   max-width: 660px;
-//   margin-bottom: 25px;
-//   font-family: $font-stack;
-
-//   & a {
-//     border-bottom: 1px solid $green-primary;
-//     color: $green-primary;
-//     text-decoration: none;
-//   }
-
-//   & .chart-title-social, & .grow-logo-social {
-//     display: none;
-//   }
-
-//   & .chart-container {
-//     width: 100%;
-//     height: 300px;
-//     margin-top: -10px;
-//     @include sm-md-xl {
-//       height: 400px;
-//     }
-//   }
-
-//   & .grow-logo {
-//     width: 214px;
-//     margin-top: 20px;
-//   }
-  
-// }
-
+  }
+}
+}
 

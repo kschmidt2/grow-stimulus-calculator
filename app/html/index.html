@@ -25,30 +25,30 @@
 
       <div class="calc-input money-input">
         <label for="principal">Initial deposit</label>
-        <input type="number" name="principal" v-model.number="principal"></input>
+        <input type="text" name="principal" v-model.number="principal" maxlength="10" v-on:change="getResults"></input>
       </div>
   
       <div class="calc-input money-input">
         <label for="contribution">Contributions</label>
-        <input type="number" name="contribution" v-model.number="contribution"></input>
+        <input type="text" name="contribution" v-model.number="contribution" maxlength="10" v-on:change="getResults"></input>
       </div>
   
       <div class="calc-input-radio">
-        <input type="radio" id="annually" name="frequency" v-model="frequency" value="1"></input>
+        <input type="radio" id="annually" name="frequency" v-model="frequency" value="1" v-on:change="getResults"></input>
         <label for="annually">Annually</label>
   
-        <input type="radio" id="monthly" name="frequency" v-model="frequency" value="12"></input>
+        <input type="radio" id="monthly" name="frequency" v-model="frequency" value="12" v-on:change="getResults"></input>
         <label for="monthly">Monthly</label>
       </div>
   
       <div class="calc-input">
         <label for="years-to-grow">Years to grow</label>
-        <input type="number" name="years-to-grow" v-model.number="yearsToGrow"></input>
+        <input type="text" name="years-to-grow" v-model.number="yearsToGrow" maxlength="10" v-on:change="getResults"></input>
       </div>
   
       <div class="calc-input percent-input">
         <label for="interest-rate">Estimated return rate</label>
-        <input type="number" name="interest-rate" v-model.number="interestRate"></input>
+        <input type="text" name="interest-rate" v-model.number="interestRate" maxlength="2" v-on:change="getResults"></input>
       </div>
 
     </div>
@@ -56,23 +56,26 @@
     <transition name="fade" mode="out-in">
        
         <div class="results">
+          
           <p class="label-text">Future balance</p>
-          <p class="value-text">${{getResults}}</p>
+          <p class="value-text">${{futureBalance}}</p>
 
           <div id="chart-area">
-            <div class="chart-container" id="chart-container"></div>
+            <div class="chart-container" id="chart-container-CIcalc"></div>
           </div>
 
          </div>
   
     </transition>
 
+    <div class="chart-credit">kiersten schmidt/grow</div>
+
     <img src="https://fm.cnbc.com/applications/cnbc.com/resources/files/2020/01/29/h_logo_white.png" class="grow-logo">
     
   </div>
     
-  <!-- <script src="https://code.highcharts.com/highcharts.js"></script>
-  <script src="https://code.highcharts.com/modules/data.js"></script> -->
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/modules/data.js"></script>
   <!-- <script src="http://code.highcharts.com/modules/exporting.js"></script> -->
   <!-- <script src="https://code.highcharts.com/highcharts-more.js"></script> -->
   <!--build:js js/main.min.js -->
