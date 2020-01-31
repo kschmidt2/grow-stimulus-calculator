@@ -11,9 +11,6 @@ var calculator = new Vue({
       futureBalance: '',
 
     },
-    computed: {
-        
-    },
     methods: {
       // functions go here
       getResults: function () {
@@ -22,9 +19,9 @@ var calculator = new Vue({
             n = this.frequency,
             t = this.yearsToGrow,
             PMT = this.contribution,
-            totalContributions,
-            fvOfPrincipal,
-            fvOfContributions,
+            totalContributions = P + (PMT*t),
+            fvOfPrincipal = P,
+            fvOfContributions = 0,
             totalReturn,
             totalInvestment,
             combined,
@@ -32,22 +29,14 @@ var calculator = new Vue({
             rData = [],
             categories,
             catArray = [],
-            tickInterval = 5;
-
-
-        totalContributions = P + (PMT*t);
-
-
-        fvOfPrincipal = P;
-        fvOfContributions = 0;
-
-        let year = new Date().getFullYear();
+            tickInterval = 5.
+            year = new Date().getFullYear();
 
         for (i=0; i<n*t; i++) {
             fvOfPrincipal = fvOfPrincipal*(1+r/n);
             fvOfContributions = (fvOfContributions+PMT)*(1+r/n);
-            totalInvestment = PMT*(i+1) + P;
             combined = fvOfPrincipal + fvOfContributions;
+            totalInvestment = PMT*(i+1) + P;
             totalReturn = combined - totalInvestment;
             iData.push(totalInvestment);
             rData.push(totalReturn);
@@ -65,7 +54,6 @@ var calculator = new Vue({
         if (iData.length > 21) {
             tickInterval = 10;
         }
-
 
         if (n==12) {  
             iData = iData.filter((element, index) => {
@@ -144,7 +132,6 @@ var calculator = new Vue({
                 yAxis: {
                     title: false,
                     labels: {
-                        // useHTML: true,
                         overflow: 'allow',
                         formatter: function () {
                             return '$' + Highcharts.numberFormat(this.value,0,'.',',');
