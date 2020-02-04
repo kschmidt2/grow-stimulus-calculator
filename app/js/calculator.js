@@ -1,8 +1,8 @@
 var calculator = new Vue({
     el: '#calculator',
     data: {
-      principal: 5000,
-      frequency:1,
+      principal: 1000,
+      frequency:12,
       contribution: 100,
       yearsToGrow: 10,
       interestRate: 7,
@@ -37,7 +37,7 @@ var calculator = new Vue({
             fvOfContributions = (fvOfContributions+PMT)*(1+r/n);
             combined = fvOfPrincipal + fvOfContributions;
             totalInvestment = PMT*(i+1) + P;
-            totalReturn = combined - totalInvestment;
+            totalReturn = Math.round(combined - totalInvestment);
             iData.push(totalInvestment);
             rData.push(totalReturn);
 
@@ -51,10 +51,6 @@ var calculator = new Vue({
         rData.unshift(0);
         catArray.unshift(year);
 
-        if (iData.length > 21) {
-            tickInterval = 10;
-        }
-
         if (n==12) {  
             iData = iData.filter((element, index) => {
                 return index % 12 === 0;
@@ -64,11 +60,28 @@ var calculator = new Vue({
             })
         }
 
+        if (iData.length > 21) {
+            tickInterval = 10;
+        } else if (iData.length < 6) {
+            tickInterval = 1;
+        }
+
         this.drawChart(iData,rData,catArray,tickInterval);
 
         this.futureBalance = fvOfPrincipal + fvOfContributions;
 
         totalReturn = this.futureBalance - totalContributions;
+
+        if (this.futureBalance > 999999999) {
+            const suffixes = ["", " billion"," trillion"];
+            let suffixNum = 0;
+            this.futureBalance /= 999999999;
+            suffixNum++;
+        
+            this.futureBalance = this.futureBalance.toPrecision(3);
+        
+            this.futureBalance += suffixes[suffixNum];
+        }
 
         this.futureBalance = this.futureBalance.toLocaleString(undefined,
             {'minimumFractionDigits':0,'maximumFractionDigits':0});
@@ -145,7 +158,8 @@ var calculator = new Vue({
                 tooltip: {
                     shadow: false,
                     padding: 10,
-                    shared: true
+                    shared: true,
+                    valuePrefix: '$'
                 },
             })
         }
@@ -162,3 +176,11 @@ var calculator = new Vue({
         this.getResults()
      },
   })
+
+  function limitNumber () {
+    if (this.value.length > this.maxLength) {
+        this.value = this.value.slice(0, this.maxLength);
+        type = "number"
+        maxlength = "2"
+    }
+  }
