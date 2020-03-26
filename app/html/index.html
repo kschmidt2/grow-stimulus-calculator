@@ -8,7 +8,7 @@
   <title>Graphic preview</title>
 
   <!--build:css css/styles.min.css-->
-  <link rel="stylesheet" href="css/compound-interest-calculator_styles.css">
+  <link rel="stylesheet" href="css/stimulus-calculator_styles.css">
   <!--endbuild-->
 
 </head>
@@ -18,38 +18,34 @@
 
   <div id="calculator">
 
-    <p class="calculator-label">Compound interest calculator</p>
+    <p class="calculator-label">How much will you get from the coronavirus stimulus?</p>
+
+    <div class="intro">Your stimulus payment will be based on your most recent tax return. Use your information for 2019 if you have filed your return. If you have not yet done so, use information from 2018. You can find your adjusted gross income on line 8b of the 2019 1040 federal tax return.</div>
 
     <div class="flex-container">
 
       <div class="input-area">
 
-        <div class="calc-input money-input">
-          <label for="principal">Initial deposit</label>
-          <input type="number" name="principal" v-model.number="principal" maxlength="10" oninput="this.value=this.value.slice(0,this.maxLength)"></input>
-        </div>
-    
-        <div class="calc-input money-input">
-          <label for="contribution">Contributions</label>
-          <input type="number" name="contribution" v-model.number="contribution" maxlength="6" oninput="this.value=this.value.slice(0,this.maxLength)"></input>
-        </div>
-    
+        <label>Filing status</label>
         <div class="calc-input-radio">
-          <input type="radio" id="annually" name="frequency" v-model="frequency" value="1"></input>
-          <label for="annually">Annually</label>
+          <input type="radio" id="single" name="status" v-model="filingStatus" value="single"></input>
+          <label for="single">Single</label>
     
-          <input type="radio" id="monthly" name="frequency" v-model="frequency" value="12"></input>
-          <label for="monthly">Monthly</label>
+          <input type="radio" id="married" name="status" v-model="filingStatus" value="married"></input>
+          <label for="married">Married</label>
+
+          <input type="radio" id="headofhousehold" name="status" v-model="filingStatus" value="head"></input>
+          <label for="headofhousehold">Head of household</label>
+        </div>
+
+        <div class="calc-input money-input">
+          <label for="income">Adjusted gross income</label>
+          <input type="text" name="income" v-model="income" maxlength="10" oninput="this.value=this.value.slice(0,this.maxLength)"></input>
         </div>
     
         <div class="calc-input">
-          <label for="years-to-grow">Years to grow</label>
-          <input type="number" name="years-to-grow" v-model.number="yearsToGrow" maxlength="2" oninput="this.value=this.value.slice(0,this.maxLength)" ></input>
-        </div>
-    
-        <div class="calc-input percent-input">
-          <label for="interest-rate">Average annual return</label>
-          <input type="number" name="interest-rate" v-model.number="interestRate" maxlength="2" oninput="this.value=this.value.slice(0,this.maxLength)" ></input>
+          <label for="children">Number of children under 17</label>
+          <input type="number" name="children" v-model.number="children" maxlength="2" oninput="this.value=this.value.slice(0,this.maxLength)" ></input>
         </div>
 
         <button v-on:click="getResults">Calculate</button>
@@ -57,17 +53,20 @@
       </div>
 
         
-      <div class="results">
-        
-        <p class="label-text">Future balance</p>
-        <p class="value-text">${{futureBalance}}</p>
-        
-        <div class="chart-container" id="chart-container-CIcalc"></div>
+      <transition name="fade">
 
-      </div>
+        <div class="results" v-show="totalStimulus">
+          
+          <p class="value-text" v-show="totalStimulus && !nothing">You will likely receive a <span class="result">${{totalStimulus}}</span> stimulus payment.</p>
+
+          <p class="value-text" v-show="nothing">You will likely not receive a stimulus payment.</p>
+          
+        </div>
+      </transition>
+
     </div>
   
-
+    <div class="chart-source">Source: 2020 CARES Act</div>
     <div class="chart-credit">kiersten schmidt/grow</div>
 
     <img src="https://fm.cnbc.com/applications/cnbc.com/resources/files/2020/01/29/h_logo_white.png" class="grow-logo">
@@ -80,7 +79,7 @@
   <!-- <script src="https://code.highcharts.com/highcharts-more.js"></script> -->
   <!--build:js js/main.min.js -->
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
-  <script src="js/compound-interest-calculator_main.js"></script>
+  <script src="js/stimulus-calculator_main.js"></script>
   <!-- endbuild -->
 </body>
 </html>

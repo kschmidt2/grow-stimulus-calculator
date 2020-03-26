@@ -46,19 +46,19 @@ $font-stack: 'Avenir Next', 'Arial', sans-serif;
   padding: 20px;
   background-color: $green-secondary-5;
   background-image: url(https://fm.cnbc.com/applications/cnbc.com/resources/files/2020/01/29/background-5.png);
-  background-position: left 75px;
+  background-position: left 105px;
   background-repeat: no-repeat;
   background-size: 620px;
-  @include x-small-only {
-    background-position: left 110px;
-  }
-  @include x-x-small {
-    background-position: left 145px;
+  @include x-small {
+    background-position: left 160px;
   }
 
-  .flex-container {
-    display: flex;
-    flex-wrap: wrap;
+  .intro {
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: .2px;
+    margin-bottom: 20px;
+    max-width: 470px;
   }
 
   b {
@@ -73,37 +73,38 @@ $font-stack: 'Avenir Next', 'Arial', sans-serif;
     font-weight: 600;
     letter-spacing: 1px;
     color: white;
+    max-width: 265px;
     @include sm-md-xl {
       font-size: 24px;
+      max-width: 450px;
     }
   }
 
   .input-area {
     width: 100%;
-    max-width: 240px;
-    // flex-shrink: 0;
     @include x-small {
       max-width: 350px;
     }
   }
 
+  label {
+    display: block;
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+
   .calc-input {
     margin-bottom: 20px;
-    & label {
-      display: block;
-      font-weight: 600;
-      font-size: 16px;
-      margin-bottom: 5px;
-    }
     & input {
       border: 1px solid $slate-secondary-3;
       font-size: 24px;
       color: $green-primary;
       font-weight: 600;
       padding: 5px 5px 5px 10px;
-      width: 180px;
+      width: 205px;
       @include x-small {
-        width: 215px;
+        width: 235px;
       }
     }
     &.money-input {
@@ -111,33 +112,25 @@ $font-stack: 'Avenir Next', 'Arial', sans-serif;
         content: '$';
         position: relative;
         top: -2px;
-        left: -190px;
+        left: -210px;
         height: 20px;
         width: 10px;
         z-index: 999;
         color: $slate-secondary-3;
         @include x-small {
-          left: -225px;
+          left: -240px;
         }
+      }
+      @include sm-md-xl {
+        float: left;
+        margin-right: 25px;
       }
       & input {
         padding-left: 25px;
-        width: 170px;
+        width: 190px;
         @include x-small {
-          width: 200px;
+          width: 220px;
         }
-      }
-    }
-    &.percent-input {
-      &:after {
-        content: '%';
-        position: relative;
-        top: -2px;
-        left: -35px;
-        height: 20px;
-        width: 10px;
-        z-index: 999;
-        color: $slate-secondary-3;
       }
     }
   }
@@ -146,10 +139,7 @@ $font-stack: 'Avenir Next', 'Arial', sans-serif;
     display: flex;
     flex-wrap: wrap;
     margin-bottom: 20px;
-    margin-top: -15px;
-    @include x-small {
-      margin-top: -15px;
-    }
+    // margin-top: -15px;
     & input {
       position: absolute !important;
       clip: rect(0, 0, 0, 0);
@@ -170,10 +160,11 @@ $font-stack: 'Avenir Next', 'Arial', sans-serif;
       font-size: 16px;
       line-height: 1;
       font-weight: 500;
-      letter-spacing: .7px;
+      letter-spacing: .2px;
       padding: 8px 2px 6px 24px;
       margin-right: 10px;
       border: 0;
+      margin-bottom: 0;
       transition: all 0.2s ease-in-out;
       &:hover {
         cursor: pointer;
@@ -182,55 +173,23 @@ $font-stack: 'Avenir Next', 'Arial', sans-serif;
   }
 
   .results {
-    flex-grow: 1;
-    background-color: white;
-    padding: 10px 0;
-    margin-top: 5px;
-    height: 80%;
-    @include x-x-small {
-      max-width: 250px;
-    }
-    @include x-small-only {
-      max-width: 320px;
-    }
-  }
-
-  p.label-text {
-    margin-block-start: 0;
-    margin-block-end: 0;
-    font-weight: 600;
-    font-size: 16px;
-    margin-left: 10px;
-    @include sm-md-xl {
-      text-align: center;
-      margin-left: 0px;
+    width: 100%;
+    margin-top: -74px;
+    margin-bottom: 20px;
+    @include x-small {
+      margin-top: -105px;
     }
   }
 
   .value-text  {
-    font-size: 36px;
-    line-height: 34px;
-    font-weight: 700;
-    color: $green-primary;
-    margin-top: 5px;
-    margin-left: 10px;
-    @include sm-md-xl {
-      text-align: center;
-      margin-left: 0px;
+    font-size: 22px;
+    & .result {
+      font-weight: 600;
+      color: white;
     }
   }
 
-  & .chart-container {
-    width: 100%;
-    height: 325px;
-    margin-top: -35px;
-    @include x-small {
-      margin-top: -20px;
-      margin-bottom: 20px;
-    }
-  }
-
-  .chart-credit {
+  .chart-credit, .chart-source {
     font-size: 9.5px;
     line-height: 12px;
     text-transform: uppercase;
@@ -238,20 +197,25 @@ $font-stack: 'Avenir Next', 'Arial', sans-serif;
     letter-spacing: 1px;
     width: 100%;
     color: white;
-    margin-top: 20px;
+    // margin-top: 20px;
     @include sm-md-xl {
         font-size: 10px;
         text-align: right;
         margin-bottom: -30px;
-  
     }
+  }
+
+  .chart-source {
+    @include sm-md-xl {
+      margin-bottom: 0px;
+  }
     @include x-x-small {
       margin-top: 80px;
     }
   }
 
   button {
-    margin-bottom: 15px;
+    margin: 5px 0 85px;
     color: white;
     font-size: 16px;
     line-height: 1;
@@ -261,7 +225,8 @@ $font-stack: 'Avenir Next', 'Arial', sans-serif;
     padding: 8px 16px 8px 16px;
     border: 0;
     transition: all 0.2s ease-in-out;
-    background-color: $green-secondary-5;
+    background-color: $green-secondary-6;
+    width: 225px;
     &:hover {
       cursor: pointer;
       color: #fff;
@@ -270,7 +235,15 @@ $font-stack: 'Avenir Next', 'Arial', sans-serif;
     }
     @include x-small {
       padding: 12px 16px 12px 16px;
+      margin-bottom: 120px;
     }
+  }
+
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
   }
 
   & .grow-logo {
