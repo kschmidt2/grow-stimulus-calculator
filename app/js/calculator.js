@@ -24,10 +24,12 @@ var calculator = new Vue({
         this.totalStimulus = 0;
         this.totalAdult = 1200;
         this.totalChilden = 0;
+        this.nothing = false;
 
         let maxFull = 75000,
             maxAny = 99000,
-            multiplier = 1;
+            multiplier = 1,
+            incomeInt = parseInt((this.income).replace(/,/g, ""), 10);
         
         if (this.filingStatus == 'married') {
             maxFull = 150000;
@@ -35,7 +37,6 @@ var calculator = new Vue({
         } else if (this.filingStatus == 'head') {
             maxFull = 112500;
         }
-
 
         this.totalChildren = this.children*500;
         this.totalAdult = this.totalAdult*multiplier;
@@ -46,15 +47,13 @@ var calculator = new Vue({
 
         this.totalStimulus = this.totalAdult + this.totalChildren;
 
-        if (this.income > maxFull) {
-            this.totalStimulus = this.totalStimulus - (this.income - maxFull)*.05;
+        if (incomeInt > maxFull) {
+            this.totalStimulus = this.totalStimulus - (incomeInt - maxFull)*.05;
         }
 
         if (this.totalStimulus <= 0) {
             this.nothing = true;
         }
-
-        console.log(this.totalStimulus);
 
         this.totalStimulus = this.totalStimulus.toLocaleString(undefined,
             {'minimumFractionDigits':0,'maximumFractionDigits':0});
