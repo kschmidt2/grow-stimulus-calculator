@@ -41,10 +41,6 @@ var calculator = new Vue({
         this.totalChildren = this.children*500;
         this.totalAdult = this.totalAdult*multiplier;
 
-        if (this.filingStatus == 'single') {
-            this.totalChildren = 0;
-        }
-
         this.totalStimulus = this.totalAdult + this.totalChildren;
 
         if (incomeInt > maxFull) {
